@@ -77,7 +77,34 @@ public class Remove Element{
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int removeElement(int[] nums, int val) {
-        
+		int length = nums.length; // 8
+
+		// 標記-1
+		int counter = 0;
+		for(int i = 0; i<length; i++){ // i = 0 - 7
+			if(nums[i] == val) {
+				nums[i] = -1;
+				counter++;
+			}
+		}
+
+		// 從後面看起，找到不是-1的，就把該不是-1的數，往前塞到前面-1的位置
+		for(int i =length-1; i>=0; i--){ // 7
+			if(nums[i]==-1)
+				continue;
+
+			if(nums[i]!=-1){
+				for(int j = i-1; j>=0; j--){ // 往前找
+					if(nums[j]==-1){         // 找到-1
+						nums[j] = nums[i];   // 往前塞
+						break;
+					}
+				}
+			}
+		}
+
+
+		return length-counter;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
