@@ -1,6 +1,7 @@
 package leetcode.editor.en;
 
 public class SwapNodesinPairs_24 {
+    // 這題難度中等，我已經可以獨立解題中等了。
     public static void main(String[] args) {
         Solution solution = new SwapNodesinPairs_24().new Solution();
         ListNode head = new ListNode(0); // 視作n0
