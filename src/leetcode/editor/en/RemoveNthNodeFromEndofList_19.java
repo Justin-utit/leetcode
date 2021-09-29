@@ -28,6 +28,7 @@ public class RemoveNthNodeFromEndofList_19 {
      * }
      */
     class Solution {
+        // 獨立完成中級
         public ListNode removeNthFromEnd(ListNode head, int n) {
             // 至少會有一個node, n也最少會有1
 
