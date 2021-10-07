@@ -1,10 +1,9 @@
 package leetcode.editor.en;
 
-import java.util.LinkedList;
+public class LinkedListCycle_141 {
 
-public class LinkedListCycleII_142 {
     public static void main(String[] args) {
-        Solution solution = new LinkedListCycleII_142().new Solution();
+        Solution solution = new LinkedListCycle_141().new Solution();
 
         ListNode headA = new ListNode(3); // 視作n0
         ListNode n1 = new ListNode(2);
@@ -14,7 +13,7 @@ public class LinkedListCycleII_142 {
         n1.next = n2;
         n2.next = n3;
 
-        solution.detectCycle(headA);
+        solution.hasCycle(headA);
 
     }
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -30,18 +29,35 @@ public class LinkedListCycleII_142 {
      * }
      */
     public class Solution {
-        public ListNode detectCycle(ListNode head) {
+        public boolean hasCycle(ListNode head) {
 
-            // 一樣用pointer應該可以
-            System.out.println(head);
+            // 有交集= 有Cycle
 
+            ListNode slow_pointer = head;
+            ListNode fast_pointer = head.next;
 
+            while(slow_pointer!=fast_pointer){
 
-            return null;
+                // reach the end and no come back around
+                if(fast_pointer==null || fast_pointer.next==null){
+                    return false;
+                }
+
+                slow_pointer = slow_pointer.next;
+                fast_pointer = fast_pointer.next.next;
+
+            }
+
+            return true;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
+
 }
+
+
+
+
 
 
 
