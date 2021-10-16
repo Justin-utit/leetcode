@@ -1,0 +1,141 @@
+package leetcode.editor.en;
+
+public class ValidateBinarySearchTree_98 {
+
+    public ValidateBinarySearchTree_98(Integer[] nums) {
+        this.nums = nums;
+    }
+    public ValidateBinarySearchTree_98() {
+    }
+    private Integer[] nums;
+    private TreeNode root;
+    public class TreeNode {
+        public TreeNode left;
+        public TreeNode right;
+        public int val;
+
+        public TreeNode(){}
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+    public void buildtree () {
+        if (this.nums.length < 0) return;
+        if (this.nums[0] == null) return;
+
+        // prepare Node instances
+        TreeNode[] nodes_tmp = new TreeNode[this.nums.length];
+        for (int i = 0; i < this.nums.length; i++) {
+            if (this.nums[i] == null) continue;
+            nodes_tmp[i] = new TreeNode(this.nums[i]);
+        }
+        // set root
+        this.root = nodes_tmp[0];
+
+        for (int i = 0; i < this.nums.length; i++) {
+            int i_left = (i + 1) * 2 - 1; // i_left_plus_one = (i_node_plus_one) * 2 -> i_left = i_left_plus_one - 1
+            int i_right = (i + 1) * 2 + 1 - 1; // i_right_plus_one = (i_node_plus_one) * 2 + 1-> i_right = i_right_plus_one - 1
+
+            TreeNode node = nodes_tmp[i];
+            if (node == null) continue;
+
+            if (i_left < this.nums.length) {
+                node.left = nodes_tmp[i_left];
+            }
+            if (i_right < this.nums.length) {
+                node.right = nodes_tmp[i_right];
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new ValidateBinarySearchTree_98().new Solution();
+
+        Integer[] nums =
+                {5,1,4,null,null,3,6};
+        ValidateBinarySearchTree_98 obj = new ValidateBinarySearchTree_98(nums);
+        obj.buildtree();
+        TreeNode treeNode = obj.root;
+
+
+        solution.isValidBST(treeNode);
+
+    }
+//leetcode submit region begin(Prohibit modification and deletion)
+
+    /*
+    BST的兩個要求
+    1 節點值 < 右節點值; 節點值 > 左節點值
+    2.1 所以找出右節點中最小的，來跟節點比較，若右節點中最小 > 節點 -> ok
+    2.2 所以找出左節點中最大的，來跟節點比較，若左節點中最大 < 節點 -> ok
+     */
+
+    class Solution {
+        public boolean isValidBST(TreeNode root) {
+
+            return isValidBSTRecursive(root);
+        }
+
+        public boolean isValidBSTRecursive(TreeNode root) {
+            if(root==null) return true;
+
+            boolean result = true;
+
+            int rootVal = root.val;
+
+            TreeNode rightMin = getMin(root.right);
+            if(rightMin!=null && rootVal>=rightMin.val)
+                result = false;
+
+            TreeNode leftMax = getMax(root.left);
+            if(leftMax!=null && rootVal<= leftMax.val)
+                result = false;
+
+            boolean resL = isValidBSTRecursive(root.left);
+            if(resL==false)
+                return false;
+
+            boolean resR = isValidBSTRecursive(root.right);
+            if(resR==false)
+                return false;
+
+            return result;
+        }
+        private TreeNode getMin(TreeNode root) {
+            if(root==null) return null;
+            while(root.left!=null){
+                root = root.left;
+            }
+            return root;
+        }
+        private TreeNode getMax(TreeNode root) {
+            if(root==null) return null;
+            while(root.right!=null){
+                root = root.right;
+            }
+            return root;
+        }
+
+    }
+//leetcode submit region end(Prohibit modification and deletion)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
