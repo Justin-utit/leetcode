@@ -1,5 +1,8 @@
 package leetcode.editor.en;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class PopulatingNextRightPointersinEachNodeII_117 {
 
     public static void main(String[] args) {
@@ -34,9 +37,60 @@ class Node {
     class Solution {
         public Node connect(Node root) {
 
-            return null;
+            if(root==null)
+                return root;
+
+            Queue<Node> queue = new LinkedList<>();
+            queue.add(root);
+            while (!queue.isEmpty()){
+                int size = queue.size();
+                for(int i = 0 ; i< size; i++){
+
+                    Node node = queue.poll();
+                    Node nextNode = queue.peek();
+                    if(node!=null){
+
+                        if(i==size-1){
+                            node.next = null;
+                        }else {
+                            node.next = nextNode;
+                        }
+
+
+                        if(node.left!=null)
+                            queue.add(node.left);
+                        if(node.right!=null)
+                            queue.add(node.right);
+                    }
+
+                }
+            }
+
+
+
+            return root;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
