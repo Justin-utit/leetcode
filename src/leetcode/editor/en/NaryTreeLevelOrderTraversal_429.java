@@ -1,6 +1,9 @@
 package leetcode.editor.en;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class NaryTreeLevelOrderTraversal_429 {
 
@@ -34,8 +37,55 @@ public class NaryTreeLevelOrderTraversal_429 {
     class Solution {
         public List<List<Integer>> levelOrder(Node root) {
 
-            return null;
+            List<List<Integer>> list = new ArrayList<>();
+
+            if(root==null)
+                return list;
+
+            Queue<Node> queue = new LinkedList<>();
+            queue.add(root);
+            while(!queue.isEmpty()){
+                int size = queue.size();
+                List<Integer> subList = new ArrayList<>();
+                for(int i = 0; i<size; i++){
+                    Node currentNode = queue.poll(); // null if empty
+
+
+                    if(currentNode!=null) {
+                        subList.add(currentNode.val);
+                        System.out.println(currentNode.val);
+                        List<Node> children = currentNode.children;
+                        for(Node node : children){
+                            System.out.println(node);
+                            queue.add(node);
+                        }
+                    }
+                }
+                list.add(subList);
+
+
+            }
+            return list;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
