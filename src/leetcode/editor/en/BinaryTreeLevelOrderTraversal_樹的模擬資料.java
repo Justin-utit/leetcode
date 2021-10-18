@@ -4,21 +4,7 @@ import java.util.List;
 
 public class BinaryTreeLevelOrderTraversal_樹的模擬資料 {
 //leetcode submit region begin(Prohibit modification and deletion)
-    /**
-     * Definition for a binary tree node.
-     * public class TreeNode {
-     *     int val;
-     *     TreeNode left;
-     *     TreeNode right;
-     *     TreeNode() {}
-     *     TreeNode(int val) { this.val = val; }
-     *     TreeNode(int val, TreeNode left, TreeNode right) {
-     *         this.val = val;
-     *         this.left = left;
-     *         this.right = right;
-     *     }
-     * }
-     */
+
     public BinaryTreeLevelOrderTraversal_樹的模擬資料(Integer[] nums) {
         this.nums = nums;
     }
@@ -93,3 +79,22 @@ public class BinaryTreeLevelOrderTraversal_樹的模擬資料 {
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
+
+
+
+/**
+ * 原置於Begin之下
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
