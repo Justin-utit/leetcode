@@ -1,4 +1,4 @@
-package hiskio.algorithm;
+package hiskio.algorithm.greedy;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -6,8 +6,8 @@ import java.util.PriorityQueue;
 public class Greedy_Maze_Cost_A {
 
     Integer[][] maze;
-    PriorityQueue<Node> pq;
-    Integer[][] maze_best;
+    PriorityQueue<Node> pq; // 所有探索過的格子(舊+新)的由小到大排序
+    Integer[][] maze_best; // 記錄所有到達某一個位置的最低成本 (either null or confirmed)
 
     static class Node{
         Integer row;
@@ -44,16 +44,18 @@ public class Greedy_Maze_Cost_A {
         pq.add(start);
 
         while (true){
-            if(pq.size()==0)
+            if(pq.size()==0) // 取完收工
                 break;
 
-            Node curr = pq.poll();
+            Node curr = pq.poll(); // 拿出最小的
 
-            if(this.maze_best[curr.row][curr.column]!=null)
+            if(this.maze_best[curr.row][curr.column]!=null) // 之前已經放過最小的了，已經confirmed過的不處理
                 continue;
 
+            // confirm
             maze_best[curr.row][curr.column] = curr.cost;
 
+            // 探索 當前+上/下/左/右
             // 上 (取得上node的節點與其成本，放進pq)
             if(curr.row-1>=0){
                 Node up = new Node(curr.row-1, curr.column);
@@ -83,7 +85,6 @@ public class Greedy_Maze_Cost_A {
         }
 
         return maze_best[target.row][target.column];
-
     }
 
     public static void main(String[] args) {
